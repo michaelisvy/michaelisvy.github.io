@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     // 1) Basic Table
     // Uncomment the next line and comment everything else for a basic table pagination and search
-    // $('#maintable').DataTable();
+    //$('#maintable').DataTable();
 
     // 2) Hide columns 3 and 4
     // Use when you want to show a different view
@@ -32,6 +32,7 @@ $(document).ready(function () {
     // - Export to PDF
     // - Set column visibility
     var table = $('#maintable').DataTable({
+        order: [],
         mark: true,
         dom: 'Bfrtip',
         lengthMenu: [
@@ -41,12 +42,6 @@ $(document).ready(function () {
         buttons: [
             'pageLength',
             {
-                extend: 'copyHtml5',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
                 extend: 'excelHtml5',
                 exportOptions: {
                     columns: ':visible'
@@ -54,12 +49,6 @@ $(document).ready(function () {
             },
             {
                 extend: 'csvHtml5',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'print',
                 exportOptions: {
                     columns: ':visible'
                 }
