@@ -1,32 +1,92 @@
-import React, { useState, useEffect } from "react";
-import { getSessionList, Session } from "../services/SgClimateService";
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import { getSessionList } from "../services/SgClimateService";
+import { Link } from "@mui/material";
 
+interface Column {
+  id: "date" | "sessionType" | "host" | "url";
+  label: string;
+  minWidth?: number;
+  align?: "right";
+  format?: (value: number) => string;
+}
 
+const columns: readonly Column[] = [
+  { id: "date", label: "Date", minWidth: 170 },
+  { id: "sessionType", label: "Session Type", minWidth: 100 },
+  {
+    id: "host",
+    label: "host",
+    minWidth: 170,
+    align: "right",
+  },
+  {
+    id: "url",
+    label: "URL",
+    minWidth: 170,
+    align: "right",
+  },
+];
 
-export const SessionList: React.FC = () => {
-  const [sessionList, setSessionList] = useState<Session[]>([]);
+const rows = getSessionList();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+export const SessionList = () => {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const fetchData = () => {
-    // Simulating fetching data from an API
-    const data = getSessionList();
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
 
-    setSessionList(data);
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   return (
-    <div>
-      {sessionList.map((session) => (
-        <div key={session.id}>
-          <p>Date: {session.date}</p>
-          <p>Session Type: {session.sessionType}</p>
-          <p>Host: {session.host}</p>
-          <p>Url: {session.url}</p>
-        </div>
-      ))}
-    </div>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Session Type</TableCell>
+              <TableCell>Host</TableCell>
+              <TableCell>Registration</TableCell> {/* Column for the button */}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.sessionType}</TableCell>
+                <TableCell>{row.host}</TableCell>
+                <TableCell>
+                  <Link href={row.url}>Registration</Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 };
