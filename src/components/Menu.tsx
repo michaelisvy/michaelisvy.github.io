@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/Menu.css"
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Button } from "@mui/material";
 
 export const Menu = () => {
   return (

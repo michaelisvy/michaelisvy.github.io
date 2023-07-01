@@ -10,31 +10,6 @@ import TableRow from "@mui/material/TableRow";
 import { getSessionList } from "../services/SgClimateService";
 import { Link } from "@mui/material";
 
-interface Column {
-  id: "date" | "sessionType" | "host" | "url";
-  label: string;
-  minWidth?: number;
-  align?: "right";
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
-  { id: "date", label: "Date", minWidth: 170 },
-  { id: "sessionType", label: "Session Type", minWidth: 100 },
-  {
-    id: "host",
-    label: "host",
-    minWidth: 170,
-    align: "right",
-  },
-  {
-    id: "url",
-    label: "URL",
-    minWidth: 170,
-    align: "right",
-  },
-];
-
 const rows = getSessionList();
 
 export const SessionList = () => {
@@ -43,6 +18,7 @@ export const SessionList = () => {
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
+    console.log(event);
   };
 
   const handleChangeRowsPerPage = (
@@ -58,7 +34,7 @@ export const SessionList = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
+              <TableCell>Date </TableCell>
               <TableCell>Session Type</TableCell>
               <TableCell>Host</TableCell>
               <TableCell>Registration</TableCell> {/* Column for the button */}
@@ -71,7 +47,7 @@ export const SessionList = () => {
                 <TableCell>{row.sessionType}</TableCell>
                 <TableCell>{row.host}</TableCell>
                 <TableCell>
-                  <Link href={row.url}>Registration</Link>
+                  <Link href={row.url} target="_blank">Registration</Link>
                 </TableCell>
               </TableRow>
             ))}

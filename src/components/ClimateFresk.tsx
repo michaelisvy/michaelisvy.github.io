@@ -1,5 +1,5 @@
 import Carousel from "react-material-ui-carousel";
-import { Paper, Button } from "@mui/material";
+import { Paper } from "@mui/material";
 import "../styles/ClimateFresk.css";
 import { useState, useEffect } from "react";
 
