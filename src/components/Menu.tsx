@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import "../styles/Menu.css"
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 
 export const Menu = () => {
-    return (
-        <div id="menu">
-        <Link to={``}>Home</Link>
-        &nbsp;
-         <Link to={`sessions`}>Schedule</Link>
-        &nbsp;
-        <Link to={`climateFresk`}>Climate Fresk</Link>
-      </div>
-    )
+  return (
+    <AppBar position="static">
+      <Toolbar  className="toolBar">
+        
+        <Button component={Link} to="/sessions" color="inherit">
+          Schedule
+        </Button>
+        <Button component={Link} to="/climateFresk" color="inherit">
+          Workshops
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
 }

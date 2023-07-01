@@ -1,5 +1,6 @@
 
-#menu {
-  color: aquamarine;
+.toolBar {
+  background-color: rgb(129, 159, 134);
+  color: black;
   text-align: center;
 }

@@ -1,5 +1,19 @@
 
 .carousel {
-  width: 1600px;
-  transform: scale(0.5);
+  width: 600px;
+  height: 400px;
+  /*transform: scale(0.5);*/
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+#description {
+  text-align: justify;
 }
