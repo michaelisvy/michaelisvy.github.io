@@ -5,4 +5,17 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   //base: '/michaelisvy.github.io/',
   plugins: [react()],
+
+  build: {
+    rollupOptions: {
+      output: {
+        // Specify the MIME type for JavaScript files
+        format: 'esm',
+        // Add the content type header for JavaScript files
+        entryFileNames: '[name].[hash].js',
+        chunkFileNames: '[name].[hash].js',
+        assetFileNames: '[name].[hash].[ext]',
+      },
+    },
+  }
 })
