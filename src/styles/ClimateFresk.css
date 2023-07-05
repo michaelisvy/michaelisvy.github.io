@@ -1,0 +1,21 @@
+
+.carousel {
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+  padding-top: 20px; 
+  /*transform: scale(0.5);*/
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  /*opacity: 0.8;*/
+}
+
+#description {
+  text-align: justify;
+  color: black;
+}
